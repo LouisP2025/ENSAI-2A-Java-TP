@@ -93,11 +93,14 @@ public class Password {
      *         true if the password is strong, false otherwise
      */
     public static HashMap<String, Boolean> checkPasswordsList(ArrayList<String> passwords) {
-
-
         
+        HashMap<String, Boolean> result = new HashMap<>();
 
-        return null;
+        for (String password : passwords) {
+            result.put(password, isStrongPassword(password));
+        }
+
+        return result;
     }
 
     /**
@@ -114,7 +117,9 @@ public class Password {
      */
     public static String generatePassword(int nbCar) {
 
-        // Code here
+        if (nbCar < 4) {
+            throw new IllegalArgumentException("Un mot de passe doit comporter au moins 4 caratères"); 
+        } 
 
         return null;
     }
