@@ -15,16 +15,21 @@ public class Book {
     /**
      * Constructs a new Book object.
      */
+
+    public Author getAuthor() {
+        return this.author;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
     public Book(String isbn, String title, Author author, int year, int pageCount) {
         this.isbn = isbn;
         this.title = title;
         this.author = author;
         this.year = year;
         this.pageCount = pageCount;
-    }
-
-    public Author getAuthor() {
-        return this.author;
     }
 
     @Override

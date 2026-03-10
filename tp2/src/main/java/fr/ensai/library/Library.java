@@ -1,61 +1,58 @@
 package fr.ensai.library;
 
-import java.awt.print.Book;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-
-/**
- * Represents a library
- */
 public class Library {
-    // -------------------------------------------------------
     // Attributes
-    // -------------------------------------------------------
     private String name;
-    private List<Book> books;
+    private List<Book> Books;
 
     /**
-     * Constructs a new library
-     * @param name
+     * Constructs a new Library object.
      */
     public Library(String name) {
         this.name = name;
-        this.books = new ArrayList<>();
+        this.Books = new ArrayList<>();
     }
 
-
-    // -------------------------------------------------------
-    // Methods
-    // -------------------------------------------------------
-
-    /**
-     * Add a book to the library's collection
-     * @param book Book
-     */
-    public void addBook(Book book) {
-
-        this.books.add(book);
+    // Method to add a book to the library's collection
+    public void addIem(Book Book) {
+        this.Books.add(Book);
     }
-    
+
     /**
-     * print all books
+     * Displays all Books currently present in the library.
      */
     public void displayBooks() {
-        if (books.isEmpty()){
-            System.out.println("no book in the library");
-        } else   {
-            for (Book b : this.books) {
-                System.out.println(b.toString());
-            }
+        if (this.Books.isEmpty()) {
+            System.out.println("\n[!] The library is empty.");
+            return;
         }
+
+        String rowFormat = "| %-10s | %-50s |%n";
+        String separator = "+------------+----------------------------------------------------+";
+
+        System.out.println("\n" + separator);
+        System.out.printf(rowFormat, "Type", "Title");
+        System.out.println(separator);
+
+        for (Book b : this.Books) {
+            System.out.printf(rowFormat,
+                    b.getClass().getSimpleName(),
+                    b.getTitle());
+        }
+
+        System.out.println(separator);
     }
-  /**
+
+    /**
      * Loads books from a CSV file and adds them to the library.
      * 
      * @param filePath The path to the CSV file containing book data.
@@ -99,6 +96,5 @@ public class Library {
             System.err.println("Error reading the file: " + e.getMessage());
         }
     }
-
 
 }
