@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.security.SecureRandom;
+import java.util.Collections;
 
 public class Password {
     /**
@@ -120,14 +122,42 @@ public class Password {
         if (nbCar < 4) {
             throw new IllegalArgumentException("Un mot de passe doit comporter au moins 4 caratères"); 
         } 
+        String upperCase = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+        String lowerCase = "abcdefghijklmnopqrstuvwxyz";
+        String digits = "0123456789";
+        String specialChars = "!@#$%^&*()-_=+";
 
-        return null;
+        SecureRandom random = new SecureRandom();
+        List<Character> password = new ArrayList<>();
+
+        // Ensure at least one character from each category
+        password.add(upperCase.charAt(random.nextInt(upperCase.length())));
+        password.add(lowerCase.charAt(random.nextInt(lowerCase.length())));
+        password.add(digits.charAt(random.nextInt(digits.length())));
+        password.add(specialChars.charAt(random.nextInt(specialChars.length())));
+
+        // Fill remaining characters randomly from all categories
+        String allChars = upperCase + lowerCase + digits + specialChars;
+        for (int i = 4; i < nbCar; i++) {
+            password.add(allChars.charAt(random.nextInt(allChars.length())));
+        }
+
+        // Shuffle to avoid predictable order
+        Collections.shuffle(password);
+
+        // Convert list to string
+        StringBuilder passwordStr = new StringBuilder();
+        for (char c : password) {
+            passwordStr.append(c);
+        }
+
+        return passwordStr.toString();
     }
 
     public static void main(String[] args) {
         if (args.length == 0) {
             // No arguments provided, running all questions
-            for (int i = 1; i <= 4; i++)
+            for (int i = 1; i <= 5; i++)
                 runQuestion(String.valueOf(i));
         } else {
             for (String arg : args) {
@@ -135,6 +165,29 @@ public class Password {
             }
         }
     }
+
+    public static String evaluePassword(String password) {
+        int score = 0;
+       
+        if (password.length()>8) score +=2;
+        if (password.length()>12) score +=2;
+        if (password.length()>16) score +=2;
+        if (password.length()>18) score +=2;
+        if (password.length()>20) score +=2;
+        if (password.matches(".*[A-Z].*")) score +=1;
+        if (password.matches(".*[a-z].*")) score +=1;
+        if (password.matches(".*[0-9].*")) score +=1;
+        if (password.matches(".*[!@#$%^&*()-_=+].*")) score +=1;
+
+        if (score < 6)       return "Weak";
+        else if (score == 6) return "Okay";
+        else if (score <= 8) return "Good";
+        else                 return "Strong";
+    }
+
+
+
+
 
     private static void runQuestion(String questionNumber) {
 
@@ -168,7 +221,12 @@ public class Password {
             case "4":
                 System.out.println("Generated password: " + generatePassword(12));
                 break;
-
+            
+            case "5":
+                System.out.println(evaluePassword("abc"));
+                System.out.println(evaluePassword("AbcDef123!"));
+                System.out.println(evaluePassword("AbcDef123!xyzAA"));
+                break;
             default:
                 System.out.println("Invalid question number: " + questionNumber);
         }

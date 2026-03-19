@@ -3,6 +3,8 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Scanner;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 
 public class Login {
     public static void main(String[] args) {
@@ -10,10 +12,44 @@ public class Login {
         Scanner scanner = new Scanner(System.in);
 
         while (true) {
+            System.out.print("Enter username: ");
+            String username = scanner.nextLine();
 
-            // Code here
+            if (!userDatabase.containsKey(username)) {
+                System.out.println("User not found. Try again.");
+                continue;
+            }
+
+            System.out.print("Enter password: ");
+            String password = scanner.nextLine();
+            String hashedInput = hashPassword(password);
+
+            if (hashedInput.equals(userDatabase.get(username))) {
+                System.out.println("Login successful!");
+                scanner.close();
+                return;
+            } else {
+                System.out.println("Incorrect password. Try again.");
+            }
         }
     }
+
+public static String hashPassword(String password) {
+    try {
+        MessageDigest md = MessageDigest.getInstance("SHA-256");
+        byte[] hashedBytes = md.digest(password.getBytes());
+        StringBuilder hexString = new StringBuilder();
+        for (byte b : hashedBytes) {
+            String hex = Integer.toHexString(0xff & b);
+            if (hex.length() == 1)
+                hexString.append('0');
+            hexString.append(hex);
+        }
+        return hexString.toString();
+    } catch (NoSuchAlgorithmException e) {
+        throw new RuntimeException("Error hashing password", e);
+    }
+}
 
     /**
      * Loads a user database from a CSV file.
