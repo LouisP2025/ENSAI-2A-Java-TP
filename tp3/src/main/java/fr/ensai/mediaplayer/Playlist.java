@@ -1,7 +1,9 @@
+package fr.ensai.mediaplayer;
+
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.print.attribute.standard.Media;
+import fr.ensai.mediaplayer.Media;
 
 import fr.ensai.mediaplayer.Artist;
 import fr.ensai.mediaplayer.MusicalGenre;
@@ -30,7 +32,7 @@ public class Playlist {
  */
     public void addMedia(Media media){
         this.mediaList.add(media);
-        this.totalDuration += media.duration;
+        this.totalDuration += media.getDuration();
     }
 
     /**
@@ -41,7 +43,7 @@ public class Playlist {
         boolean present = this.mediaList.contains(media);
         if (present){
             this.mediaList.remove(media);
-            this.totalDuration -= media.duration;
+            this.totalDuration -= media.getDuration();
         }
         return present;
     }
@@ -58,5 +60,16 @@ public class Playlist {
         return totalDuration;
     }
     
+    public int size() {
+    return this.mediaList.size();
+    }
 
+    public boolean contains(String title) {
+        for (Media media : this.mediaList) {
+            if (media.getTitle().equals(title)) {
+                return true;
+            }
+        }
+        return false;
+    }
 }

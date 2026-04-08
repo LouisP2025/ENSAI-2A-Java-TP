@@ -26,9 +26,8 @@ public class Artist {
     }
 
     /**
-     * String representation of the Song.
+     * String representation of the Name.
      */
-    @Override
     public String toString() {
         return String.format("Artist name %s %s",this.firstName, this.lastName);
     }

@@ -9,6 +9,20 @@ public abstract class Media {
         this.title = title;
         this.duration = duration;
         this.year = year;
+    
+    
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public int getYear() {
+        return year;
+    }
+
+    public int getDuration() {
+        return duration;
     }
 
     public abstract String getText();
