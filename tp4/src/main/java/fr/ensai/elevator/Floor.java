@@ -75,8 +75,32 @@ public class Floor {
      * 
      * @param elevators the list of elevators available in the hotel
      */
+    List<Integer> nbPassengers = new ArrayList<>();
+    
     public void requestElevator(List<Elevator> elevators) {
-        elevators.get(0).addDestination(this.number);
+
+
+        for (Elevator e : elevators) {
+        
+            if (e.containDestination(this.number)){
+                return;
+
+            }
+        }
+
+        Elevator elevator_true;
+        elevator_true = elevators.getFirst();
+
+        for (Elevator e : elevators){
+
+            if(e.getDestinationQueueSize() < elevator_true.getDestinationQueueSize()){
+
+                elevator_true = e;
+
+            }
+        elevator_true.addDestination(this.number);
+        }
+
     }
 
     /**
