@@ -42,6 +42,10 @@ public class Elevator {
         this.lastUnloaded = new ArrayList<>();
     }
 
+    public boolean isFull(){
+        return (this.capacity <= this.passengers.size());
+    }
+
     public int getId() {
         return this.id;
     }
@@ -129,7 +133,7 @@ public class Elevator {
      */
     public void loadPassengers(Floor floor) {
 
-        while (this.passengers.size() < this.capacity) {
+        while (!this.isFull()) {
             Person person = floor.boardNextPerson();
             if (person == null)
                 break;
