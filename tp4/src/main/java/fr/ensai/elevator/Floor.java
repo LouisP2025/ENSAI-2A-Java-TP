@@ -78,29 +78,20 @@ public class Floor {
     List<Integer> nbPassengers = new ArrayList<>();
     
     public void requestElevator(List<Elevator> elevators) {
-
-
-        for (Elevator e : elevators) {
-        
+        for (Elevator e : elevators) {  
             if (e.containDestination(this.number)){
                 return;
-
             }
         }
 
-        Elevator elevator_true;
-        elevator_true = elevators.getFirst();
-
+        Elevator elevatorTrue;
+        elevatorTrue = elevators.getFirst();
         for (Elevator e : elevators){
-
-            if(e.getDestinationQueueSize() < elevator_true.getDestinationQueueSize()){
-
-                elevator_true = e;
-
+            if(e.getDestinationQueueSize() < elevatorTrue.getDestinationQueueSize()){
+                elevatorTrue = e;
             }
-        elevator_true.addDestination(this.number);
         }
-
+        elevatorTrue.addDestination(this.number);
     }
 
     /**
@@ -136,5 +127,10 @@ public class Floor {
             sb.append(p).append(" ");
         }
         return sb.toString();
+    }
+
+    public Object getWaitingPeople() {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'getWaitingPeople'");
     }
 }

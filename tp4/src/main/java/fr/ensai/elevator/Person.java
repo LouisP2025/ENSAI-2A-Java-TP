@@ -47,9 +47,7 @@ public class Person {
         int randNumber = this.startFloor;
         while (randNumber == this.startFloor) {
             randNumber = random.nextInt(Config.getInt("hotel.numberFloor"));           
- 
-        }
-
+         }
         return randNumber;   
     }
 

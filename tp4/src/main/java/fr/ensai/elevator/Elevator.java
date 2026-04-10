@@ -50,6 +50,18 @@ public class Elevator {
         return this.id;
     }
 
+    public List<Person> getPassengers() {
+        return passengers;
+    }
+    // Créee uniquement pour le test IsFull()
+    public void addPassenger(Person person){
+        this.passengers.add(person);
+    }
+
+    public int getCapacity() {
+        return capacity;
+    }
+
     public int getCurrentFloor() {
         return this.currentFloor;
     }
