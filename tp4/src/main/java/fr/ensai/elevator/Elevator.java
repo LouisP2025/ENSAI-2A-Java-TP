@@ -17,14 +17,14 @@ import org.apache.logging.log4j.Logger;
  */
 public class Elevator {
 
-    private static final Logger logger = LogManager.getLogger(Elevator.class);
+    protected static final Logger logger = LogManager.getLogger(Elevator.class);
 
-    private int id;
+    protected int id;
     private int capacity;
-    private int currentFloor;
-    private List<Integer> destinationQueue;
-    private List<Person> passengers;
-    private List<Person> lastUnloaded;
+    protected int currentFloor;
+    protected List<Integer> destinationQueue;
+    protected List<Person> passengers;
+    protected List<Person> lastUnloaded;
 
     /**
      * Constructs a new Elevator with the specified parameters.

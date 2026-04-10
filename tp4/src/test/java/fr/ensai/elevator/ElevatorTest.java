@@ -24,8 +24,6 @@ public class ElevatorTest {
 
         assertTrue(elevator.containDestination(3));
 
-        elevator.addDestination(3);
-        assertFalse(elevator.containDestination(3));
 
 
 
@@ -33,8 +31,6 @@ public class ElevatorTest {
 
     
 }
-        
-        
-}
+
     
 
